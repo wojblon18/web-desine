@@ -1,31 +1,96 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portwolia wojciech blonski</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt - Wojciech Błoński</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<link rel="stylesheet" href="style.css">
 <body>
-   <main class="profile-section">
-    <div class="profile-contener">
-        <img src="https://th.bing.com/th/id/OIP.z12Jz3jCpFzAwdwi1orpJAHaHa?w=167&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1" alt="zdjecie profilowe" class="profile-image">
-        <h1 class="profile-name">dane kontaktowe</h1>
-        <p>Wojciech Błoński
-📍 ul. Słoneczna 14/3
-📫 60-123 Poznań
-📞 +48 512 345 678
-✉️ wojciech.blonski@example.com
+  <main class="contact-section">
+    <h1>Formularz kontaktowy</h1>
 
-💻 github.com/wojciechblonski
+    <!-- Formularz kontaktowy -->
+    <form id="contactForm">
+      <div class="form-group">
+        <label for="name">Imię:</label>
+        <input type="text" id="name" placeholder="Twoje imię">
+        <small class="error-message" id="nameError"></small>
+      </div>
 
-💼 linkedin.com/in/wojciech-blonski</p>
-    </div>
-   </main>
-   <nav class="navigation">
-    <a href="index.html" class="navigation-buuton">powrót</a>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Twój adres e-mail">
+        <small class="error-message" id="emailError"></small>
+      </div>
 
+      <div class="form-group">
+        <label for="message">Wiadomość:</label>
+        <textarea id="message" placeholder="Twoja wiadomość"></textarea>
+        <small class="error-message" id="messageError"></small>
+      </div>
 
-   </nav>
+      <button type="submit" class="send-button">Wyślij</button>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Wojciech Błoński</p>
+  </footer>
+
+  <!-- Skrypt walidacji formularza -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contactForm');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault(); // zatrzymuje domyślne wysłanie formularza
+
+        // Pobranie wartości pól
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        // Elementy błędów
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const messageError = document.getElementById('messageError');
+
+        // Reset komunikatów błędów
+        nameError.textContent = '';
+        emailError.textContent = '';
+        messageError.textContent = '';
+
+        let valid = true;
+
+        // Walidacja imienia
+        if (name === '') {
+          nameError.textContent = 'Pole imię jest wymagane.';
+          valid = false;
+        }
+
+        // Walidacja email
+        if (email === '') {
+          emailError.textContent = 'Pole email jest wymagane.';
+          valid = false;
+        } else if (!email.includes('@')) {
+          emailError.textContent = 'Adres email musi zawierać znak @.';
+          valid = false;
+        }
+
+        // Walidacja wiadomości
+        if (message === '') {
+          messageError.textContent = 'Pole wiadomość jest wymagane.';
+          valid = false;
+        }
+
+        // Jeśli wszystko poprawne
+        if (valid) {
+          alert('Dziękujemy! Twoja wiadomość została wysłana.');
+          form.reset(); // czyści formularz
+        }
+      });
+    });
+  </script>
 </body>
 </html>
